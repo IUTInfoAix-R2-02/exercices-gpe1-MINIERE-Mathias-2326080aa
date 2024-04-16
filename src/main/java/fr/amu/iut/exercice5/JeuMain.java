@@ -5,16 +5,19 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class JeuMain extends Application {
+import java.util.ArrayList;
 
+public class JeuMain extends Application {
+    private static ArrayList obstacles = new ArrayList();
     private Scene scene;
     private BorderPane root;
 
     @Override
     public void start(Stage primaryStage) {
-
         root = new BorderPane();
 
         //Acteurs du jeu
@@ -27,6 +30,10 @@ public class JeuMain extends Application {
         jeu.setPrefSize(640, 480);
         jeu.getChildren().add(pacman);
         jeu.getChildren().add(fantome);
+
+        obstacles.add(new Obstacle(200,50,50,200));
+        jeu.getChildren().addAll(obstacles);
+
         root.setCenter(jeu);
         //on construit une scene 640 * 480 pixels
         scene = new Scene(root);
@@ -56,13 +63,28 @@ public class JeuMain extends Application {
                 case RIGHT:
                     j1.deplacerADroite(scene.getWidth());
                     break;
+                case UP:
+                    j1.deplacerEnHaut();
+                    break;
+                case DOWN:
+                    j1.deplacerEnBas(scene.getHeight());
+                    break;
                 case Z:
-                    //j2...... vers le haut;
+                    j2.deplacerEnHaut();
+                    break;
+                case Q:
+                    j2.deplacerAGauche();
+                    break;
+                case S:
+                    j2.deplacerEnBas(scene.getHeight());
+                    break;
+                case D:
+                    j2.deplacerADroite(scene.getWidth());
                     break;
 
             }
             if (j1.estEnCollision(j2))
-                System.out.println("Collision....");
+                System.exit(0);
         });
     }
 

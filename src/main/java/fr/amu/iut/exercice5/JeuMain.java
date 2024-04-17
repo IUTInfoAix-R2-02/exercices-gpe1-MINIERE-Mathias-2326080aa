@@ -10,14 +10,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Timer;
 
 public class JeuMain extends Application {
-    private static ArrayList obstacles = new ArrayList();
+    private static ArrayList<Obstacle> obstacles = new ArrayList<>();
     private Scene scene;
     private BorderPane root;
 
     @Override
     public void start(Stage primaryStage) {
+        obstacles.add(new Obstacle(5,2,2,20));
+        obstacles.add(new Obstacle(10,10,10,1));
+
         root = new BorderPane();
 
         //Acteurs du jeu
@@ -31,7 +36,6 @@ public class JeuMain extends Application {
         jeu.getChildren().add(pacman);
         jeu.getChildren().add(fantome);
 
-        obstacles.add(new Obstacle(200,50,50,200));
         jeu.getChildren().addAll(obstacles);
 
         root.setCenter(jeu);
@@ -56,6 +60,10 @@ public class JeuMain extends Application {
      */
     private void deplacer(Personnage j1, Personnage j2) {
         scene.setOnKeyPressed((KeyEvent event) -> {
+            double j1_X=j1.getLayoutX();
+            double j1_Y=j1.getLayoutY();
+            double j2_X=j2.getLayoutX();
+            double j2_Y=j2.getLayoutY();
             switch (event.getCode()) {
                 case LEFT:
                     j1.deplacerAGauche();
@@ -82,6 +90,16 @@ public class JeuMain extends Application {
                     j2.deplacerADroite(scene.getWidth());
                     break;
 
+            }
+            for (int i=0; i < obstacles.size(); ++i){
+                if (j1.estEnCollision(obstacles.get(i))){
+                    j1.setLayoutX(j1_X);
+                    j1.setLayoutY(j1_Y);
+                }
+                if (j2.estEnCollision(obstacles.get(i))){
+                    j2.setLayoutX(j2_X);
+                    j2.setLayoutY(j2_Y);
+                }
             }
             if (j1.estEnCollision(j2))
                 System.exit(0);

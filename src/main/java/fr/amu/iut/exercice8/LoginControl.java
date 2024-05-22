@@ -15,7 +15,7 @@ public class LoginControl extends GridPane {
 
     @FXML
     private void okClicked() {
-        System.out.println(uid);
+        System.out.println(uid.getCharacters());
         System.out.println("*".repeat(pwd.getLength()));
     }
 

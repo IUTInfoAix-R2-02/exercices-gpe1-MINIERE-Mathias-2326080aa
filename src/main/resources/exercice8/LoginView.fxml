@@ -19,8 +19,10 @@
     <PasswordField fx:id="pwd" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
 <!--  à compléter pour les boutons -->
-    <Button fx:id="okButton" text="Ok" GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#okClicked" />
-    <Button fx:id="cancelButton" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#cancelClicked" />
+    <HBox GridPane.columnSpan="2" GridPane.rowIndex="3" alignment="CENTER" spacing="20.0">
+        <Button fx:id="okButton" text="Ok" onAction="#okClicked"/>
+        <Button fx:id="cancelButton" text="Cancel" onAction="#cancelClicked"/>
+    </HBox>
 
    <columnConstraints>
       <ColumnConstraints maxWidth="103.0" minWidth="63.0" prefWidth="83.0" />

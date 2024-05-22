@@ -1,6 +1,11 @@
-package fr.amu.iut.exercice1;
+package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,6 +25,7 @@ public class Palette extends Application {
     private int nbVert = 0;
     private int nbRouge = 0;
     private int nbBleu = 0;
+    private IntegerProperty nbFois;
 
     private Label texteDuHaut;
 
@@ -33,7 +39,12 @@ public class Palette extends Application {
 
     private Label texteDuBas;
 
+    private StringProperty nomDuBouton;
 
+    public Palette(){
+        nbFois = new SimpleIntegerProperty();
+        nomDuBouton = new SimpleStringProperty();
+    }
     @Override
     public void start(Stage primaryStage) {
         root = new BorderPane();
@@ -58,6 +69,22 @@ public class Palette extends Application {
         bleu = new Button("Bleu");
 
         /* VOTRE CODE ICI */
+        vert.setOnAction(event -> {
+            panneau.setStyle("-fx-background-color: green");
+            nbVert+=1;
+            nbFois.set(nbVert);
+            texteDuHaut.setText("Vert choisi " + nbFois.get() + " fois");
+        });
+        rouge.setOnAction(event -> {
+            panneau.setStyle("-fx-background-color: red");
+            nbRouge += 1;
+            nbFois.set(nbRouge);
+        });
+        bleu.setOnAction(event -> {
+            panneau.setStyle("-fx-background-color: blue");
+            nbBleu += 1;
+            nbFois.set(nbBleu);
+        });
 
         boutons.getChildren().addAll(vert, rouge, bleu);
 

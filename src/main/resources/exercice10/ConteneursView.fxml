@@ -1,2 +1,63 @@
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane></BorderPane>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<BorderPane minHeight="400.0" minWidth="600.0">
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="New"/>
+                <MenuItem text="Open"/>
+                <MenuItem text="Save"/>
+                <MenuItem text="Close"/>
+            </Menu>
+            <Menu text="Edit">
+                <MenuItem text="Cut"/>
+                <MenuItem text="Copy"/>
+                <MenuItem text="Paste"/>
+            </Menu>
+            <Menu text="Help"/>
+        </MenuBar>
+    </top>
+    <left>
+        <HBox>
+            <VBox alignment="CENTER" spacing="10.0">
+                <Label text="Boutons :"/>
+                <Button text="Bouton 1"/>
+                <Button text="Bouton 2"/>
+                <Button text="Bouton 3"/>
+            </VBox>
+            <Separator orientation="VERTICAL"/>
+        </HBox>
+    </left>
+    <center>
+        <VBox alignment="CENTER" spacing="10.0">
+            <GridPane alignment="CENTER" vgap="10.0" hgap="10.0">
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+            <HBox alignment="CENTER" spacing="10.0">
+                <Button text="Submit"/>
+                <Button text="Cancel"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox alignment="CENTER">
+            <Separator/>
+            <Label text="Ceci est un label de bas de page"/>
+        </VBox>
+
+    </bottom>
+</BorderPane>

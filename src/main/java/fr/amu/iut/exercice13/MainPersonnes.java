@@ -1,5 +1,6 @@
 package fr.amu.iut.exercice13;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -13,11 +14,51 @@ public class MainPersonnes  {
 
     public static void main(String[] args) {
 
-        lesPersonnes = FXCollections.observableArrayList();
+        lesPersonnes = FXCollections.observableArrayList(personne -> new Observable[]{personne.ageProperty()});
 
-//        unChangementListener = à completer
+        unChangementListener = new ListChangeListener<Personne>() {
+            @Override
+            public void onChanged(Change<? extends Personne> change) {
+                while (change.next()) {
+                    if (change.wasAdded()) {
+                        for (Personne addPersonne : change.getAddedSubList())
+                            System.out.println(addPersonne.getNom());
+                    } else if (change.wasRemoved()){
+                        for (Personne remPersonne : change.getRemoved())
+                            System.out.println(remPersonne.getNom());
+                    } else if (change.wasUpdated()) {
+                        Personne updPersonne = change.getList().get(change.getFrom());
+                        System.out.println(updPersonne.getNom()+ " a maintenant "+ updPersonne.getAge()+ " ans.");
+                    }
+                }
+                System.out.println("Fin");
+            }
+        };
 
-        lesPersonnes.addListener(unChangementListener);
+        ListChangeListener<Personne> plusieursChangementListener = new ListChangeListener<Personne>() {
+            @Override
+            public void onChanged(Change<? extends Personne> change) {
+                while (change.next()) {
+                    if (change.wasAdded()) {
+                        for (Personne addPersonne : change.getAddedSubList())
+                            System.out.println(addPersonne.getNom());
+                    }
+                    if (change.wasRemoved()) {
+                        for (Personne remPersonne : change.getRemoved())
+                            System.out.println(remPersonne.getNom());
+                    }
+                    if (change.wasUpdated()) {
+                        Personne updPersonne = change.getList().get(change.getFrom());
+                        System.out.println(updPersonne.getNom() + " a maintenant " + updPersonne.getAge() + " ans.");
+                    }
+                }
+                System.out.println("Fin");
+            }
+        };
+
+
+        lesPersonnes.addListener(plusieursChangementListener);
+        question5();
     }
 
     public static void question1() {

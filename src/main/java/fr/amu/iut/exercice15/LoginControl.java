@@ -1,5 +1,8 @@
-package fr.amu.iut.exercice5;
+package fr.amu.iut.exercice15;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,7 +16,9 @@ public class LoginControl extends GridPane {
     private PasswordField pwd;
 
     private void createBindings() {
-        // MÉTHODE À COMPLÉTER
+        BooleanProperty moinsDeSixCarac = new SimpleBooleanProperty();
+        moinsDeSixCarac.bind(Bindings.greaterThanOrEqual(6, userId.lengthProperty()));
+        pwd.textProperty().bind(Bindings.when(moinsDeSixCarac).then("").otherwise(pwd.getText()));
     }
 
     @FXML
